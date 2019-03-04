@@ -1,0 +1,159 @@
+{% extends "common/templates/layout.njk" %}
+
+{% block pageTitle %}
+    {{serviceName}} - Record contact with a stakeholder
+{% endblock %}
+
+{% block beforeContent %}
+     {{ govukBackLink({
+        text: "Back",
+        href: "/engagement"
+    }) }}
+{% endblock %}
+
+{% block content %}
+
+{% set otherTheme %}
+
+     {{ govukInput({
+        id: "stakeholder-other-theme",
+        name: "stakeholder-other-theme",
+        value: data['stakeholder-other-theme'],
+        label: {
+            text: "Other themes"
+        },
+        hint: {
+            text: "Seperate each theme with a comma"
+        },
+        classes: "govuk-!-width-three-quarters"
+    }) }}
+
+{% endset %}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            
+            <h1 class="govuk-heading-l">
+                <span class="govuk-caption-l">Record contact with a stakeholder</span>
+                Engagement summary
+            </h1>
+            <form action="summary" method="get" class="form">
+                {% call govukFieldset({
+                    }) %}               
+
+                    {{ govukTextarea({
+                        name: "stakeholder-summary-of-contact",
+                        id: "stakeholder-summary-of-contact",
+                        value: data['stakeholder-summary-of-contact'],
+                        rows: "15",
+                        label: {
+                            text: "Summary of contact"
+                        },
+                        hint: {
+                            text: "Provide the key points, issues, risks, etc discussed with the stakeholder"
+                        }
+                    }) }}
+
+                    {{ govukInput({
+                        label: {
+                            text: "Engagement notes"
+                        },
+                        hint: {
+                            text: "eg sharepoint link"
+                        },
+                        classes: "govuk-!-width-two-thirds",
+                        id: "stakeholder-file-notes",
+                        name: "stakeholder-file-notes"
+                    }) }}
+
+
+                    {{ govukCheckboxes({
+                        idPrefix: "stakeholder-themes",
+                        name: "stakeholder-themes",
+                        value: data['stakeholder-themes'],
+                        fieldset: {
+                            legend: {
+                            text: "Which themes did you cover?",
+                            isPageHeading: true,
+                            classes: "govuk-fieldset__legend--m"
+                            }
+                        },
+                        items: [
+                                {
+                    value: 'communities',
+                    text: 'Communities'
+                }
+            
+                ,  
+                {
+                    value: 'housing',
+                    text: 'Housing'
+                }
+            
+                ,  
+                {
+                    value: 'jobs-and-growth',
+                    text: 'Jobs and growth'
+                }
+            
+                ,  
+                {
+                    value: 'homelessness-and-rough-sleeping',
+                    text: 'Homelessness and Rough Sleeping'
+                }
+            
+                ,  
+                {
+                    value: 'local-economies',
+                    text: 'Local economies'
+                }
+            
+                ,  
+                {
+                    value: 'local-government',
+                    text: 'Local government'
+                }
+            
+                ,  
+                {
+                    value: 'local-resilience',
+                    text: 'Local resilience'
+                }
+            
+                ,  
+                {
+                    value: 'local-service-delivery',
+                    text: 'Local service delivery'
+                }
+            
+                ,  
+                {
+                    value: 'other',
+                    text: 'Other'
+                }
+                            ]
+                    }) }}
+
+                {% endcall %}
+                {{ govukButton({
+                    text: "Save and continue",
+                    classes: "govuk-button"
+                }) }}
+            </form>
+        </div>
+
+        <div class="govuk-grid-column-one-third">
+            <aside class="app-related-items" role="complementary">
+                <dl class="mhclg-summary-list">
+                    <dt>Stakeholder name</dt>
+                    <dd>{{ data['stakeholder-full-name'] }}</dd>
+                    <dt>Anonymous</dt>
+                    <dd>Yes</dd>
+                    <dt>Last edited by</dt>
+                    <dd><a href="#">Sarah Walton</a> on 6 August 2018 at 13:06 GMT</dd>
+                </dl>
+            </aside>
+        </div>
+    </div>
+
+{% endblock %}

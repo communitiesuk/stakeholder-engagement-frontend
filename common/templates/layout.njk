@@ -1,18 +1,61 @@
-{% from "components/footer/macro.njk" import govukFooter %}
+{% from "components/accordion/macro.njk"        import govukAccordion %}
+{% from "components/back-link/macro.njk"        import govukBackLink %}
+{% from "components/breadcrumbs/macro.njk"      import govukBreadcrumbs %}
+{% from "components/button/macro.njk"           import govukButton %}
+{% from "components/character-count/macro.njk"  import govukCharacterCount %}
+{% from "components/checkboxes/macro.njk"       import govukCheckboxes %}
+{% from "components/date-input/macro.njk"       import govukDateInput %}
+{% from "components/details/macro.njk"          import govukDetails %}
+{% from "components/error-message/macro.njk"    import govukErrorMessage %}
+{% from "components/error-summary/macro.njk"    import govukErrorSummary %}
+{% from "components/fieldset/macro.njk"         import govukFieldset %}
+{% from "components/file-upload/macro.njk"      import govukFileUpload %}
+{% from "components/footer/macro.njk"           import govukFooter %}
+{% from "components/input/macro.njk"            import govukInput %}
+{% from "components/inset-text/macro.njk"       import govukInsetText %}
+{% from "components/panel/macro.njk"            import govukPanel %}
+{% from "components/phase-banner/macro.njk"     import govukPhaseBanner %}
+{% from "components/radios/macro.njk"           import govukRadios %}
+{% from "components/select/macro.njk"           import govukSelect %}
+{% from "components/skip-link/macro.njk"        import govukSkipLink %}
+{% from "components/summary-list/macro.njk"     import govukSummaryList %}
+{% from "components/table/macro.njk"            import govukTable %}
+{% from "components/tabs/macro.njk"             import govukTabs %}
+{% from "components/tag/macro.njk"              import govukTag %}
+{% from "components/textarea/macro.njk"         import govukTextarea %}
+{% from "components/warning-text/macro.njk"     import govukWarningText %}
 
 {% extends "template.njk" %}
 
-{% block pageTitle %}GDS Node.js boilerplate{% endblock %}
+{% block pageTitle %}Stakeholder Engagement Service{% endblock %}
 
 {% block head %}
   {% include "common/templates/includes/head.njk" %}
+{% endblock %}
+
+{% block header %}
+  {# Set serviceName in config.js. #}
+  {{ govukHeader({
+    homepageUrl: "/",
+    serviceName: "Stakeholder Engagement Service",
+    serviceUrl: "/",
+    containerClasses: "govuk-width-container"
+  }) }}
+
+  {{ govukPhaseBanner({
+    classes: "govuk-width-container",
+    tag: {
+      text: "alpha"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'  
+  }) }}
 {% endblock %}
 
 {% block footer %}
   {{
     govukFooter({
       meta: {
-        html: 'Built by the <a href="#" class="govuk-footer__link">Government Digital Service</a>'
+        html: 'Built by <a href="#" class="govuk-footer__link">MHCLG Digital</a>'
       }
     })
   }}
