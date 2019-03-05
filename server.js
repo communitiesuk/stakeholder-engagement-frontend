@@ -104,7 +104,11 @@ function initialisePublic (app) {
 }
 
 function initialiseRoutes (app) {
-  router.bind(app)
+  if (typeof (router) !== 'function') {
+    router.bind(app)
+  } else {
+    app.use('/', router)
+  }
 }
 
 function listen () {
