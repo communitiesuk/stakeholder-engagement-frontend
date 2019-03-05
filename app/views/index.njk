@@ -1,0 +1,52 @@
+{% extends "common/templates/layout.njk" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">
+       
+    </h1>
+  </div>
+</div>
+<div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <form action="engagement/next-steps" method="get" class="form">
+                {% call govukFieldset({
+                    legend: {
+                      text: "Login",
+                      isPageHeading: true,
+                      classes: "govuk-fieldset__legend--l"
+                    }
+                    }) %}
+
+                  {{ govukInput({
+                    label: {
+                      text: "Username"
+                    },
+                    classes: "govuk-input--width-20",
+                    id: "login-username",
+                    name: "login-username"
+                  }) }}
+
+                  {{ govukInput({
+                    label: {
+                      text: "Password"
+                    },
+                    classes: "govuk-input--width-20",
+                    type: "password",
+                    id: "login-password",
+                    name: "login-password"
+                  }) }}
+
+
+                {% endcall %}
+
+                {{ govukButton({
+                    text: "Login",
+                    href: "/engagement",
+                    classes: "govuk-button"
+                }) }}
+            </form>
+      </div>
+    </div>
+{% endblock %}
