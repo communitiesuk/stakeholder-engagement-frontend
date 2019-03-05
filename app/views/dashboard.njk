@@ -30,63 +30,18 @@
   <div class="govuk-grid-row govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Policy Area</h3>
-      <ul class="govuk-list govuk-body-s">
-        {% for link, policy in policies %}
-          <li>
-            <a class="govuk-link" href="/policy/{{ link }}">{{ policy }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      
     </div>
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Regions</h3>
-      <ul class="govuk-list govuk-body-s">
-      {% for link, region in regions %}
-          <li>
-            <a class="govuk-link" href="/region/{{ link }}">{{ region }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+      <pre>
+      {{ regions | dump(2) }}
+      </pre>
     </div>
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-    <table class="govuk-table">
-          <caption class="govuk-table__caption govuk-heading-m">Engagement history</caption>
-          <thead class="govuk-table__head">
-              <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Date</th>
-                <th class="govuk-table__header" scope="col">Stakeholder</th>
-                <th class="govuk-table__header" scope="col">Organisation</th>
-                <th class="govuk-table__header govuk-!-width-one-half" scope="col">Summary</th>
-              </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-              {% for entry in entries %}
-                  <tr class="govuk-table__row">
-                      <td class="govuk-table__cell govuk-body-s" scope="row">
-                          {{ entry.date }}
-                      </td>
-                      <td class="govuk-table__cell govuk-body-s" scope="row">
-                          <a href='{{ entry.stakeholderURL }}'>
-                            {{ entry.name }}
-                          </a>
-                      </td>
-                      <td class="govuk-table__cell govuk-body-s">
-                          <a href='{{ entry.organisationURL }}'>
-                            {{ entry.organisation }}
-                          </a>
-                      </td>
-                      <td class="govuk-table__cell govuk-body-s">
-                        {{ entry.summary | escape | truncate(200) | nl2br }}
-                      </td>
-                  </tr>
-              {% endfor %}
-          </tbody>
-      </table>
-
-      
-    
+       
         {{ govukButton({
               text: "Record a new engagement",
               classes: "govuk-button",
