@@ -34,9 +34,13 @@
     </div>
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Regions</h3>
-      <pre>
-      {{ regions | dump(2) }}
-      </pre>
+       <ul class="govuk-list govuk-body-s">
+        {% for region in regions %}
+            <li>
+              <a class="govuk-link" href="/region/{{ region.slug }}">{{ region.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
     </div>
   </div>
   <div class="govuk-grid-row">
