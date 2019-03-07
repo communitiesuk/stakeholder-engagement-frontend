@@ -1,5 +1,5 @@
 const JsonApi = require('devour-client');
-const npmPkg = require('/package.json');
+const npmPkg = require('../../package.json');
 
 const dashboardRouter = (req, res) => {
   const params = {};
