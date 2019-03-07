@@ -29,7 +29,6 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
     "i18n": "0.8.x",
-    "kitsu": "^7.0.0",
     "lodash": "^4.17.4",
     "minimist": "1.2.x",
     "morgan": "1.9.x",
