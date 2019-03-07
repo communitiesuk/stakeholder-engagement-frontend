@@ -1,5 +1,5 @@
 {
-  "name": "gds-nodejs-boilerplate",
+  "name": "stakeholder-engagement-frontend",
   "description": "Stakeholder Engagement Service Frontend",
   "version": "0.0.1",
   "private": true,
@@ -28,7 +28,6 @@
     "express": "4.16.x",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
-    "grunt2gulp": "https://github.com/omouse/grunt2gulp.js/archive/0.0.2-cool-card.tar.gz",
     "i18n": "0.8.x",
     "kitsu": "^7.0.0",
     "lodash": "^4.17.4",

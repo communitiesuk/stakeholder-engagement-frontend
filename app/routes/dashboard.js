@@ -1,4 +1,6 @@
 const JsonApi = require('devour-client');
+const npmPkg = require('/package.json');
+
 const dashboardRouter = (req, res) => {
   const params = {};
   const jsonApi = new JsonApi({
@@ -21,7 +23,8 @@ const dashboardRouter = (req, res) => {
 
       if (payload.req.method === 'GET') {
         payload.req.headers = {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'user-agent': `stakeholder-engagement-frontend/${npmPkg.version} (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
         }
       }
       return payload
