@@ -6,25 +6,44 @@ const dashboardRouter = (req, res) => {
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
     'user-agent': `stakeholder-engagement-frontend/${npmPkg.version} (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
   });
+  const params = {};
+  const apis = [
+    {
+      type: 'region',
+      model : {
+        id: '',
+        slug: "",
+        name: "",
+        nuts_code: "",
+        created_at: "",
+        updated_at: "",
+        links: {}
+      }
+    },
+    {
+      type: 'policy_area',
+      model : {
+        "id": '',
+        "slug": '',
+        "name": '',
+        "created_at": '',
+        "updated_at": '',
+        links: {}
+      }
+    }
+  ];
 
-  // model
-  jsonApi.define('region', {
-    id: '',
-    slug: "",
-    name: "",
-    nuts_code: "",
-    created_at: "",
-    updated_at: "",
-    links : {}
+  apis.forEach(({ type, model }, index) => {
+    jsonApi.define(type, model);
   });
 
-  const params = {};
-  const apis = ['region'];
   (async () => {
-    const responses = await Promise.all(apis.map((api) => jsonApi.findAll(api)));
+    const responses = await Promise.all(
+      apis.map(({type}) => jsonApi.findAll(type))
+    );
 
-    apis.forEach((api, index) => {
-      params[api] = responses[index].data;
+    apis.forEach(({ type }, index) => {
+      params[type] = responses[index].data;
     });
 
     res.render('app/views/dashboard', params);
