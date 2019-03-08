@@ -30,7 +30,14 @@
   <div class="govuk-grid-row govuk-!-margin-bottom-9">
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Policy Area</h3>
-      
+      <ul class="govuk-list govuk-body-s">
+       {% set policy_areas = policy_area %}
+        {% for entry in policy_areas %}
+            <li>
+              <a class="govuk-link" href="/engagements/policy_area/{{ entry.slug }}">{{ entry.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
     </div>
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Regions</h3>
@@ -38,7 +45,7 @@
        {% set regions = region %}
         {% for entry in regions %}
             <li>
-              <a class="govuk-link" href="/region/{{ entry.slug }}">{{ entry.name }}</a>
+              <a class="govuk-link" href="/engagements/region/{{ entry.slug }}">{{ entry.name }}</a>
             </li>
           {% endfor %}
         </ul>
