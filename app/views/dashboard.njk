@@ -35,10 +35,10 @@
     <div class="govuk-grid-column-one-half">
       <h3 class="govuk-heading-m mhclg-border-top govuk-!-padding-top-5">Regions</h3>
        <ul class="govuk-list govuk-body-s">
-       {% set regions = data[0].data %}
-        {% for region in regions %}
+       {% set regions = region %}
+        {% for entry in regions %}
             <li>
-              <a class="govuk-link" href="/region/{{ region.slug }}">{{ region.name }}</a>
+              <a class="govuk-link" href="/region/{{ entry.slug }}">{{ entry.name }}</a>
             </li>
           {% endfor %}
         </ul>

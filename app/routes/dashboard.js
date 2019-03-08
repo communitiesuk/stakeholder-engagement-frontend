@@ -2,7 +2,6 @@ const Devour = require('devour-client');
 const npmPkg = require('../../package.json');
 
 const dashboardRouter = (req, res) => {
-  const params = {};
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
     'user-agent': `stakeholder-engagement-frontend/${npmPkg.version} (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
@@ -19,14 +18,14 @@ const dashboardRouter = (req, res) => {
     links : {}
   });
 
+  const params = {};
+  const apis = ['region'];
   (async () => {
-    const responses = await Promise.all([
-      jsonApi.findAll('region')
-    ]);
+    const responses = await Promise.all(apis.map((api) => jsonApi.findAll(api)));
 
-    params.data = responses.map((response) => {
-      return { data, errors, meta, links } = response;
-    })
+    apis.forEach((api, index) => {
+      params[api] = responses[index].data;
+    });
 
     res.render('app/views/dashboard', params);
 
