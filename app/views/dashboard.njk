@@ -34,7 +34,7 @@
        {% set policy_areas = policy_area %}
         {% for entry in policy_areas %}
             <li>
-              <a class="govuk-link" href="/region/{{ entry.slug }}">{{ entry.name }}</a>
+              <a class="govuk-link" href="/engagements/policy_area/{{ entry.slug }}">{{ entry.name }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -45,7 +45,7 @@
        {% set regions = region %}
         {% for entry in regions %}
             <li>
-              <a class="govuk-link" href="/region/{{ entry.slug }}">{{ entry.name }}</a>
+              <a class="govuk-link" href="/engagements/region/{{ entry.slug }}">{{ entry.name }}</a>
             </li>
           {% endfor %}
         </ul>
