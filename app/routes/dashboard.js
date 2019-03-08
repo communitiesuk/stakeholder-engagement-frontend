@@ -1,52 +1,36 @@
-const JsonApi = require('devour-client');
+const Devour = require('devour-client');
+const npmPkg = require('../../package.json');
+
 const dashboardRouter = (req, res) => {
-  const params = {};
-  const jsonApi = new JsonApi({
-    apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1'
+  const jsonApi = new Devour({
+    apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
+    'user-agent': `stakeholder-engagement-frontend/${npmPkg.version} (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
   });
 
   // model
   jsonApi.define('region', {
-    slug: '',
-    name: '',
-    nuts_code: '',
-    created_at: '',
-    updated_at: ''
+    id: '',
+    slug: "",
+    name: "",
+    nuts_code: "",
+    created_at: "",
+    updated_at: "",
+    links : {}
   });
 
-  // -- Middleware
-  let requestMiddleware = {
-    name: 'add-headers',
-    req: (payload) => {
+  const params = {};
+  const apis = ['region'];
+  (async () => {
+    const responses = await Promise.all(apis.map((api) => jsonApi.findAll(api)));
 
-      if (payload.req.method === 'GET') {
-        payload.req.headers = {
-          'Accept': 'application/json'
-        }
-      }
-      return payload
-    }
-  };
-  let responseMiddleware = {
-    name: 'populate-params',
-    res: (payload) => {
-      params.regions = payload.data;
-      renderPage();
+    apis.forEach((api, index) => {
+      params[api] = responses[index].data;
+    });
 
-      return payload
-    }
-  };
-
-  jsonApi.insertMiddlewareBefore('axios-request', requestMiddleware)
-  jsonApi.insertMiddlewareAfter('response', responseMiddleware)
-
-  // -- deconstruct response
-  let { data, errors, meta, links } = jsonApi.findAll('region');
-  // params.regions = data;
-  // workaround until jsonAPI is amended
-  renderPage = () => {
     res.render('app/views/dashboard', params);
-  }
+
+  })();
+
 };
 
 module.exports = dashboardRouter;
