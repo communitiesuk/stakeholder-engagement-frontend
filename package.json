@@ -10,14 +10,14 @@
   "scripts": {
     "compile": "grunt generate-assets",
     "clean": "grunt clean",
-    "server": "node ./start.js",
-    "start": "npm run compile && npm run server",
+    "start": "node ./start.js",
     "watch": "chokidar app test *.js --initial -c 'npm run test'",
     "watch-live-reload": "./node_modules/.bin/grunt watch",
     "lint-sass": "./node_modules/.bin/sass-lint -v",
     "test": "standard && node ./node_modules/mocha/bin/mocha '!(node_modules)/**/*+(.test|.tests)'.js",
     "snyk-protect": "./node_modules/.bin/snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "heroku-postbuild": "npm run compile"
   },
   "dependencies": {
     "body-parser": "1.18.x",
@@ -28,6 +28,7 @@
     "express": "4.16.x",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.1",
+    "govuk-frontend": "^2.7.0",
     "i18n": "0.8.x",
     "lodash": "^4.17.4",
     "minimist": "1.2.x",
@@ -51,7 +52,6 @@
     "chokidar-cli": "latest",
     "envfile": "^3.0.0",
     "eslint": "^5.14.1",
-    "govuk-frontend": "^2.7.0",
     "grunt": "^1.0.3",
     "grunt-babel": "^8.0.0",
     "grunt-browserify": "^5.3.0",

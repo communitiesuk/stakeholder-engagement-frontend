@@ -1,1 +1,1 @@
-web: node ./node_modules/grunt/bin/grunt generate-assets && node server.js
+web: npm start
