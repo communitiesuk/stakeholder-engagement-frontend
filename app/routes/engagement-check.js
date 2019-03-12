@@ -18,9 +18,9 @@ const engagementRouter = (req, res) => {
   Joi.validate(body, schema, (err, value) => {
 
     if (err) {
-			console.log('engagementRouter -> err', err)
+			console.log('engagementRouter -> err', err.details)
     } else {
-      console.log('engagementRouter -> value', value)
+      params.data = value;
     }
 
     res.render(template, params);

@@ -1,7 +1,5 @@
 {% extends "common/templates/layout.njk" %}
 
-{% extends "common/templates/layout.njk" %}
-
 {% block pageTitle %}
     {{serviceName}} - Record contact with a stakeholder
 {% endblock %}
@@ -9,7 +7,7 @@
 {% block beforeContent %}
      {{ govukBackLink({
         text: "Back",
-        href: "/engagement"
+        href: "javascript:history.back(1)"
     }) }}
 {% endblock %}
 
@@ -39,7 +37,7 @@
                 <span class="govuk-caption-l">Record contact with a stakeholder</span>
                 Engagement summary
             </h1>
-            <form action="summary" method="get" class="form">
+            <form action="next-steps" method="post" class="form">
                 {% call govukFieldset({
                     }) %}               
 
@@ -148,11 +146,9 @@
             <aside class="app-related-items" role="complementary">
                 <dl class="mhclg-summary-list">
                     <dt>Stakeholder name</dt>
-                    <dd>{{ data['stakeholder-full-name'] }}</dd>
+                    <dd>{{ data.full_name | capitalize }}</dd>
                     <dt>Anonymous</dt>
-                    <dd>Yes</dd>
-                    <dt>Last edited by</dt>
-                    <dd><a href="#">Sarah Walton</a> on 6 August 2018 at 13:06 GMT</dd>
+                    <dd>{{ data.anonymous | capitalize }}</dd>
                 </dl>
             </aside>
         </div>

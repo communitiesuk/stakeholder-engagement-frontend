@@ -1,0 +1,82 @@
+{% extends "common/templates/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-l">
+        <span class="govuk-caption-l">Stakeholder</span>
+        {{ stakeholder.name.fullName }}
+      </h1>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+            <dl class="mhclg-summary-list">
+                <dt>Position</dt>
+                <dd> {{ stakeholder }} </dd>
+            </dl>
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+            <dl class="mhclg-summary-list">
+                <dt>Organisation</dt>
+                <dd>
+                    <a class="govuk-link" href="/organisation/{{organisation.uid}}"> (organisation name)</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+            <dl class="mhclg-summary-list">
+                <dt>Region</dt>
+                <dd> (region) </dd>
+            </dl>
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+           <a href="/stakeholder/{{ stakeholder }}/engagement/new" role="button" draggable="false" class="govuk-button">
+            Record engagement
+            </a>
+        </div>
+    </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">  
+        <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-heading-m">Engagement history</caption>
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col">Date</th>
+                <th class="govuk-table__header" scope="col">Staff</th>
+                <th class="govuk-table__header" scope="col">Themes</th>
+                <th class="govuk-table__header govuk-!-width-one-half" scope="col">Summary</th>
+            </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+            {% for entry in engagements %}
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell govuk-body-s" scope="row">
+                        {{ entry.date }}
+                    </td>
+                    <td class="govuk-table__cell govuk-body-s" scope="row">
+                            {{ entry.staff }}
+                    </td>
+                    <td class="govuk-table__cell govuk-body-s">
+                            {% for item in entry.themes %}
+                            <li>
+                                {% if item == "other" %}
+                                    {{ data['stakeholder-other-theme'] | replace(", ", "\n") | escape | nl2br }}
+                                {% else %}
+                                    {{item}}                            
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </td>
+                    <td class="govuk-table__cell govuk-body-s">
+                        {{ entry.summary | escape | truncate(200) | nl2br }}
+                        <a href="#">See full engagement</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+  </div>
+
+{% endblock %}

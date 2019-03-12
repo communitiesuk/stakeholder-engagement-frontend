@@ -1,0 +1,47 @@
+{% extends "common/templates/layout.njk" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-l">
+        Search results
+      </h1>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+         <table class="govuk-table">
+            <caption class="govuk-table__caption govuk-heading-s">All results for "{{ query.search_field }}"</caption>
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col">Name</th>
+                  <th class="govuk-table__header" scope="col">Position</th>
+                  <th class="govuk-table__header" scope="col">Organisation</th>
+                  <th class="govuk-table__header govuk-!-width-one-half" scope="col">Region</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for entry in people %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell govuk-body-s" scope="row">
+                            <a href="stakeholder/{{entry.slug}}">
+                            {{ entry.title }} {{ entry.name }}
+                           </a>
+                        </td>
+                        <td class="govuk-table__cell govuk-body-s" scope="row">
+                            (Position)
+                        </td>
+                        <td class="govuk-table__cell govuk-body-s">
+                            (Organisation)
+                        </td>
+                        <td class="govuk-table__cell govuk-body-s">
+                            (Region)
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+{% endblock %}
