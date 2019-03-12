@@ -1,16 +1,17 @@
 {
   "name": "stakeholder-engagement-frontend",
-  "description": "Stakeholder Engagement Service Frontend",
+  "description": "Stakeholder Engagement Service frontend",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">6.12.2"
+    "node": ">11.6.0"
   },
   "scripts": {
     "compile": "grunt generate-assets",
     "clean": "grunt clean",
-    "start": "node ./start.js",
+    "server": "node ./start.js",
+    "start": "npm run compile && npm run server",
     "watch": "chokidar app test *.js --initial -c 'npm run test'",
     "watch-live-reload": "./node_modules/.bin/grunt watch",
     "lint-sass": "./node_modules/.bin/sass-lint -v",
@@ -27,9 +28,9 @@
     "dotenv": "^6.2.0",
     "express": "4.16.x",
     "express-session": "^1.15.6",
-    "express-validator": "^5.3.1",
     "govuk-frontend": "^2.7.0",
     "i18n": "0.8.x",
+    "joi": "^14.3.1",
     "lodash": "^4.17.4",
     "minimist": "1.2.x",
     "morgan": "1.9.x",

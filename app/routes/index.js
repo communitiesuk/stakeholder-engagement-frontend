@@ -1,7 +1,5 @@
 const indexRouter = (req, res) => {
-  const params = {
-    message: `Hello, world!`
-  }
+  const params = {}
   res.render('app/views/index', params)
 };
 

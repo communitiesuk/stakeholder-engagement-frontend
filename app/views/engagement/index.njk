@@ -31,14 +31,13 @@
                 <span class="govuk-caption-l">Record contact with a stakeholder</span>
                 Engagement details
             </h1>
-            <form action="engagement/next-steps" method="get" class="form">
+            <form action="engagement/summary" method="post" class="form">
                 {% call govukFieldset({
                     }) %}
                     
                     {{ govukInput({
-                        id: "stakeholder-full-name",
-                        name: "stakeholder-full-name",
-                        value: data['stakeholder-full-name'],
+                        id: "full_name",
+                        name: "full_name",
                         label: {
                             text: "Stakeholder's Full name"
                         },
@@ -49,8 +48,8 @@
                     }) }}
 
                     {{ govukCheckboxes({
-                        idPrefix: "stakeholder-anonymous",
-                        name: "stakeholder-anonymous",
+                        idPrefix: "anonymous",
+                        name: "anonymous",
                         items: [
                             {
                                 value: "yes",
@@ -63,8 +62,8 @@
                     }) }}
 
                     {{ govukDateInput({
-                        id: "stakeholder-date-contact",
-                        namePrefix: "stakeholder-date-contact",
+                        id: "date_contact",
+                        namePrefix: "date_contact",
                         fieldset: {
                             legend: {
                             text: "Date of contact",
@@ -78,27 +77,23 @@
                         items: [
                             {
                             name: "day",
-                            classes: "govuk-input--width-2",
-                            value: data['stakeholder-date-contact-day']
+                            classes: "govuk-input--width-2"
                             },
                             {
                             name: "month",
-                            classes: "govuk-input--width-2",
-                            value: data['stakeholder-date-contact-month']
+                            classes: "govuk-input--width-2"
                             },
                             {
                             name: "year",
-                            classes: "govuk-input--width-4",
-                            value: data['stakeholder-date-contact-year']
+                            classes: "govuk-input--width-4"
                             }
                         ]
                     }) }}
 
                     {{ govukRadios({
                         classes: "govuk-radios--inline",
-                        idPrefix: "stakeholder-successful-contact",
-                        name: "stakeholder-successful-contact",
-                        value: data['stakeholder-successful-contact'],
+                        idPrefix: "successful_contact",
+                        name: "successful_contact",
                         fieldset: {
                             legend: {
                             text: "Did you make contact?",
@@ -109,7 +104,8 @@
                         items: [
                             {
                                 value: "yes",
-                                text: "Yes"
+                                text: "Yes",
+                                checked : true
                             },
                             {
                                 value: "no",

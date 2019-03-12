@@ -10,7 +10,7 @@
 </div>
 <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <form action="engagement/next-steps" method="get" class="form">
+        <form action="login" method="post" class="form">
                 {% call govukFieldset({
                     legend: {
                       text: "Login",
@@ -43,7 +43,6 @@
 
                 {{ govukButton({
                     text: "Login",
-                    href: "/engagement",
                     classes: "govuk-button"
                 }) }}
             </form>
