@@ -27,7 +27,7 @@ const stakeholderRouter = (req, res) => {
     types.map(type => jsonApi.define(type, models[type]));
 
     await Promise.all(
-      types.map(type => jsonApi.findAll('people', { filter: { id } }))
+      types.map(type => jsonApi.find('people', id))
     ).then(function(responses) {
       types.forEach((type, index) => {
         params[type] = responses[index].data;
