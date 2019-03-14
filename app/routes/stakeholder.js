@@ -3,6 +3,7 @@ const npmPkg = require('../../package.json');
 const models = require('../lib/apis.json');
 
 const stakeholderRouter = (req, res) => {
+  const template = 'app/views/stakeholder';
   const {
     query,
     params: { stakeholder }
@@ -11,7 +12,6 @@ const stakeholderRouter = (req, res) => {
     query,
     stakeholder
   };
-  const template = 'app/views/stakeholder';
 
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
