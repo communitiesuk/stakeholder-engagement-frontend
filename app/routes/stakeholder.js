@@ -1,5 +1,6 @@
 const Devour = require('devour-client');
 const npmPkg = require('../../package.json');
+const models = require('../lib/apis.json');
 
 const stakeholderRouter = (req, res) => {
   const {
@@ -10,6 +11,7 @@ const stakeholderRouter = (req, res) => {
     query,
     stakeholder
   };
+  const template = 'app/views/stakeholder';
 
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
@@ -18,50 +20,22 @@ const stakeholderRouter = (req, res) => {
     } (https://github.com/communitiesuk/stakeholder-engagement-frontend)`,
     pluralize: false
   });
-  const apis = [
-    {
-      type: 'people',
-      model: {
-        id: '',
-        slug: '',
-        name: '',
-        title: '',
-        created_at: '',
-        updated_at: '',
-        roles: {
-          jsonApi: 'hasMany',
-          type: 'roles'
-        }
-      }
-    },
-    {
-      type: 'role',
-      model: {
-        id: '',
-        slug: '',
-        name: '',
-        role_type: ''
-      }
-    }
+
+  const apis = ['people', 'role'];
+  const promises = [
+    jsonApi.findAll('people', { filter: { slug: stakeholder } })
   ];
 
-  apis.forEach(({ type, model }, index) => {
-    jsonApi.define(type, model);
-  });
-
   (async () => {
-    const responses = await Promise.all(
-      apis.map(({ type }) =>
-        jsonApi.findAll('people', { filter: { slug: stakeholder } })
-      )
-    );
+    apis.map(type => jsonApi.define(type, models[type]));
 
-    apis.forEach(({ type }, index) => {
+    const responses = await Promise.all(promises);
+
+    apis.forEach((type, index) => {
       params[type] = responses[index].data;
-			console.log('TCL: responses', responses)
     });
 
-    res.render('app/views/stakeholder', params);
+    res.render(template, params);
   })();
 };
 

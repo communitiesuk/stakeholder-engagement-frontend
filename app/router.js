@@ -4,7 +4,6 @@ const router = express.Router();
 // --------------------------------------------------------------
 const dashboardRouter = require('./routes/dashboard.js');
 const engagementRouter = require('./routes/engagement.js');
-const engagementCheckRouter = require('./routes/engagement-check.js');
 const healthcheckRouter = require('./routes/healthcheck.js');
 const indexRouter = require('./routes/index.js');
 const loginRouter = require('./routes/login.js');
@@ -20,10 +19,7 @@ router.get('/search', searchRouter);
 router.post('/login', loginRouter);
 // -------------------------------------------------------------- /stakeholder & engagements
 router.get('/stakeholder/:stakeholder/engagement/new', engagementRouter);
-router.post(
-  '/stakeholder/:stakeholder/engagement/:step?',
-  engagementCheckRouter
-);
+router.post('/stakeholder/:stakeholder/engagement/:step?', engagementRouter);
 router.get('/stakeholder/:stakeholder', stakeholderRouter);
 
 // --------------------------------------------------------------
