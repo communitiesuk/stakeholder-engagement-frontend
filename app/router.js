@@ -18,9 +18,9 @@ router.get('/search', searchRouter);
 // -------------------------------------------------------------- /login
 router.post('/login', loginRouter);
 // -------------------------------------------------------------- /stakeholder & engagements
-router.get('/stakeholder/:stakeholder/engagement/new', engagementRouter);
-router.post('/stakeholder/:stakeholder/engagement/:step?', engagementRouter);
-router.get('/stakeholder/:stakeholder', stakeholderRouter);
+router.get('/stakeholder/:id/engagement/new', engagementRouter);
+router.post('/stakeholder/:id/engagement/:step?', engagementRouter);
+router.get('/stakeholder/:id', stakeholderRouter);
 
 // --------------------------------------------------------------
 module.exports = router;

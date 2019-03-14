@@ -6,11 +6,11 @@ const stakeholderRouter = (req, res) => {
   const template = 'app/views/stakeholder';
   const {
     query,
-    params: { stakeholder }
+    params: { id }
   } = req;
   params = {
     query,
-    stakeholder
+    id
   };
 
   const jsonApi = new Devour({
@@ -21,18 +21,17 @@ const stakeholderRouter = (req, res) => {
     pluralize: false
   });
 
-  const apis = ['people', 'role'];
-  const promises = [
-    jsonApi.findAll('people', { filter: { slug: stakeholder } })
-  ];
+  const types = ['people', 'role'];
 
   (async () => {
-    apis.map(type => jsonApi.define(type, models[type]));
+    types.map(type => jsonApi.define(type, models[type]));
 
-    const responses = await Promise.all(promises);
-
-    apis.forEach((type, index) => {
-      params[type] = responses[index].data;
+    await Promise.all(
+      types.map(type => jsonApi.findAll('people', { filter: { id } }))
+    ).then(function(responses) {
+      types.forEach((type, index) => {
+        params[type] = responses[index].data;
+      });
     });
 
     res.render(template, params);

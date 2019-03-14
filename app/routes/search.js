@@ -1,12 +1,13 @@
 const Devour = require('devour-client');
 const npmPkg = require('../../package.json');
+const models = require('../lib/apis.json');
 
 const searchRouter = (req, res) => {
+  const template = 'app/views/search';
   const { query } = req;
-  params = {
+  const params = {
     query
   };
-
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
     'user-agent': `stakeholder-engagement-frontend/${
@@ -14,49 +15,23 @@ const searchRouter = (req, res) => {
     } (https://github.com/communitiesuk/stakeholder-engagement-frontend)`,
     pluralize: false
   });
-  const apis = [
-    {
-      type: 'people',
-      model: {
-        id: '',
-        slug: '',
-        name: '',
-        title: '',
-        created_at: '',
-        updated_at: '',
-        roles: {
-          jsonApi : 'hasMany',
-          type : 'roles'
-        }
-      }
-    },
-    {
-      type: 'role',
-      model: {
-        id: '',
-        slug: '',
-        name: '',
-        role_type: ''
-      }
-    }
-  ];
 
-  apis.forEach(({ type, model }, index) => {
-    jsonApi.define(type, model);
-  });
+  const types = ['people', 'role'];
 
   (async () => {
-    const responses = await Promise.all(
-      apis.map(({ type }) =>
+    types.map(type => jsonApi.define(type, models[type]));
+
+    await Promise.all(
+      types.map(type =>
         jsonApi.findAll('people', { filter: { search: query.search_field } })
       )
-    );
-
-    apis.forEach(({ type }, index) => {
-      params[type] = responses[index].data;
+    ).then(function(responses) {
+      types.forEach((type, index) => {
+        params[type] = responses[index].data;
+      });
     });
 
-    res.render('app/views/search', params);
+    res.render(template, params);
   })();
 };
 

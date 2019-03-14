@@ -12,16 +12,17 @@ const dashboardRouter = (req, res) => {
     } (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
   });
 
-  const apis = ['region', 'policy_area'];
-  const promises = apis.map(type => jsonApi.findAll(type));
+  const types = ['region', 'policy_area'];
+  const promises = types.map(type => jsonApi.findAll(type));
 
   (async () => {
-    apis.map(type => jsonApi.define(type, models[type]));
+    types.map(type => jsonApi.define(type, models[type]));
 
-    const responses = await Promise.all(promises);
-
-    apis.forEach((type, index) => {
-      params[type] = responses[index].data;
+    await Promise.all(promises)
+    .then(function(responses) {
+      types.forEach((type, index) => {
+        params[type] = responses[index].data;
+      });
     });
 
     res.render(template, params);
