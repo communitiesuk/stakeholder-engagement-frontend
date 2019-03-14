@@ -5,7 +5,7 @@
     <div class="govuk-grid-column-full">
       <h1 class="govuk-heading-l">
         <span class="govuk-caption-l">Stakeholder</span>
-        {{ stakeholder.name.fullName }}
+        {{ people.name }}
       </h1>
     </div>
   </div>
@@ -31,13 +31,13 @@
             </dl>
         </div>
         <div class="govuk-grid-column-one-quarter">
-           <a href="/stakeholder/{{ stakeholder }}/engagement/new" role="button" draggable="false" class="govuk-button">
+           <a href="/stakeholder/{{ id }}/engagement/new" role="button" draggable="false" class="govuk-button">
             Record engagement
             </a>
         </div>
     </div>
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">  
+    <div class="govuk-grid-column-full">
         <table class="govuk-table">
         <caption class="govuk-table__caption govuk-heading-m">Engagement history</caption>
         <thead class="govuk-table__head">
