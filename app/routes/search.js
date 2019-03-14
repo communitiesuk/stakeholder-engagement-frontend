@@ -2,24 +2,28 @@ const Devour = require('devour-client');
 const npmPkg = require('../../package.json');
 const models = require('../lib/apis.json');
 
-const dashboardRouter = (req, res) => {
-  const template = 'app/views/dashboard';
-  const params = {};
+const searchRouter = (req, res) => {
+  const template = 'app/views/search';
+  const { query: { search_field } } = req;
+  const params = { search_field };
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
     'user-agent': `stakeholder-engagement-frontend/${
       npmPkg.version
-    } (https://github.com/communitiesuk/stakeholder-engagement-frontend)`
+    } (https://github.com/communitiesuk/stakeholder-engagement-frontend)`,
+    pluralize: false
   });
 
-  const types = ['region', 'policy_area'];
-  const promises = types.map(type => jsonApi.findAll(type));
+  const types = ['people', 'role'];
 
   (async () => {
     types.map(type => jsonApi.define(type, models[type]));
 
-    await Promise.all(promises)
-    .then(function(responses) {
+    await Promise.all(
+      types.map(type =>
+        jsonApi.findAll('people', { filter: { search: search_field } })
+      )
+    ).then(function(responses) {
       types.forEach((type, index) => {
         params[type] = responses[index].data;
       });
@@ -29,4 +33,4 @@ const dashboardRouter = (req, res) => {
   })();
 };
 
-module.exports = dashboardRouter;
+module.exports = searchRouter;

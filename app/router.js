@@ -1,27 +1,26 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 // --------------------------------------------------------------
-const indexRouter = require("./routes/index.js");
-const dashboardRouter = require("./routes/dashboard.js");
-const engagementRouter = require("./routes/engagement.js");
-const loginRouter = require("./routes/login.js");
+const dashboardRouter = require('./routes/dashboard.js');
+const engagementRouter = require('./routes/engagement.js');
+const healthcheckRouter = require('./routes/healthcheck.js');
+const indexRouter = require('./routes/index.js');
+const loginRouter = require('./routes/login.js');
+const searchRouter = require('./routes/search.js');
+const stakeholderRouter = require('./routes/stakeholder.js');
 
-const healthcheckRouter = require("./routes/healthcheck.js");
-const engagementCheckRouter = require("./routes/engagement-check.js");
-
-
-// -------------------------------------------------------------- /index
-router.get("/", indexRouter);
-// -------------------------------------------------------------- /dashboard
-router.get("/dashboard", dashboardRouter);
-// -------------------------------------------------------------- /healthcheck
-router.get("/healthcheck", healthcheckRouter);
-
-// -------------------------------------------------------------- /dashboard
-router.post("/login", loginRouter);
-// -------------------------------------------------------------- engagement
-router.post("/engagement/:step?", engagementCheckRouter);
+// -------------------------------------------------------------- /get
+router.get('/', indexRouter);
+router.get('/dashboard', dashboardRouter);
+router.get('/healthcheck', healthcheckRouter);
+router.get('/search', searchRouter);
+// -------------------------------------------------------------- /login
+router.post('/login', loginRouter);
+// -------------------------------------------------------------- /stakeholder & engagements
+router.get('/stakeholder/:id/engagement/new', engagementRouter);
+router.post('/stakeholder/:id/engagement/:step?', engagementRouter);
+router.get('/stakeholder/:id', stakeholderRouter);
 
 // --------------------------------------------------------------
 module.exports = router;

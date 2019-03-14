@@ -1,0 +1,35 @@
+{
+  "people": {
+    "id": "",
+    "slug": "",
+    "name": "",
+    "title": "",
+    "created_at": "",
+    "updated_at": "",
+    "roles": {
+      "jsonApi": "hasMany",
+      "type": "roles"
+    }
+  },
+  "role": {
+    "id": "",
+    "slug": "",
+    "name": "",
+    "role_type": ""
+  },
+  "region": {
+    "id": "",
+    "slug": "",
+    "name": "",
+    "nuts_code": "",
+    "created_at": "",
+    "updated_at": ""
+  },
+  "policy_area": {
+    "id": "",
+    "slug": "",
+    "name": "",
+    "created_at": "",
+    "updated_at": ""
+  }
+}
