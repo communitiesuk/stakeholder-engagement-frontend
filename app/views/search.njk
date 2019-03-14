@@ -11,7 +11,7 @@
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
          <table class="govuk-table">
-            <caption class="govuk-table__caption govuk-heading-s">All results for "{{ query.search_field }}"</caption>
+            <caption class="govuk-table__caption govuk-heading-s">All results for "{{ search_field }}"</caption>
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                   <th class="govuk-table__header" scope="col">Name</th>
@@ -24,7 +24,7 @@
                 {% for entry in people %}
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell govuk-body-s" scope="row">
-                            <a href="stakeholder/{{entry.slug}}">
+                            <a href="stakeholder/{{ entry.id }}">
                             {{ entry.title }} {{ entry.name }}
                            </a>
                         </td>

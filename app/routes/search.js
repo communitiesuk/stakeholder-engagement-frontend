@@ -4,10 +4,8 @@ const models = require('../lib/apis.json');
 
 const searchRouter = (req, res) => {
   const template = 'app/views/search';
-  const { query } = req;
-  const params = {
-    query
-  };
+  const { query: { search_field } } = req;
+  const params = { search_field };
   const jsonApi = new Devour({
     apiUrl: 'https://stakeholder-engagement-api.herokuapp.com/api/v1',
     'user-agent': `stakeholder-engagement-frontend/${
@@ -23,7 +21,7 @@ const searchRouter = (req, res) => {
 
     await Promise.all(
       types.map(type =>
-        jsonApi.findAll('people', { filter: { search: query.search_field } })
+        jsonApi.findAll('people', { filter: { search: search_field } })
       )
     ).then(function(responses) {
       types.forEach((type, index) => {
